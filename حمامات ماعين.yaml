@@ -1,0 +1,106 @@
+# Nexus device configuration
+# Device: المسجل المطري 6 جديد (حمامات ماعين)
+# Template: Rain Gauge / 5
+# Schema version: 1
+# Generated: 2026-11-25T06:35:17Z
+version: 1
+daq:
+  exportFileName: "data"
+  flushCapacityPercentageTrigger: 0.8
+  exportSDInterval: 10
+  exportSD_Binary: true
+  exportSD_CSV: true
+  exportSD_CSVPending: true
+  tippingBucketDebounce_ms: 25
+attachments:
+- type: RTClock
+  readMode: Interval
+  readInterval: 400
+  absoluteWakeMinute: [-1, -1, -1, -1, -1, -1]
+  bootDelay_ms: 50
+  filters:
+  - {type: None, sampleCount: 1, sampleInterval: 0}
+  - {type: None, sampleCount: 1, sampleInterval: 0}
+  - {type: None, sampleCount: 1, sampleInterval: 0}
+  - {type: None, sampleCount: 1, sampleInterval: 0}
+  triggers:
+  - {min: -1, max: -1, eventID: NONE, hysteresis: 0}
+  - {min: -1, max: -1, eventID: NONE, hysteresis: 0}
+  - {min: -1, max: -1, eventID: NONE, hysteresis: 0}
+  - {min: -1, max: -1, eventID: NONE, hysteresis: 0}
+- type: INA219
+  readMode: Interval
+  readInterval: 400
+  absoluteWakeMinute: [-1, -1, -1, -1, -1, -1]
+  bootDelay_ms: 50
+  filters:
+  - {type: None, sampleCount: 1, sampleInterval: 0}
+  - {type: None, sampleCount: 1, sampleInterval: 0}
+  - {type: None, sampleCount: 1, sampleInterval: 0}
+  - {type: None, sampleCount: 1, sampleInterval: 0}
+  triggers:
+  - {min: -1, max: -1, eventID: NONE, hysteresis: 0}
+  - {min: -1, max: -1, eventID: NONE, hysteresis: 0}
+  - {min: -1, max: -1, eventID: NONE, hysteresis: 0}
+  - {min: -1, max: -1, eventID: NONE, hysteresis: 0}
+- type: BME280
+  readMode: Interval
+  readInterval: 400
+  absoluteWakeMinute: [-1, -1, -1, -1, -1, -1]
+  bootDelay_ms: 0
+  filters:
+  - {type: None, sampleCount: 1, sampleInterval: 0}
+  - {type: None, sampleCount: 1, sampleInterval: 0}
+  - {type: None, sampleCount: 1, sampleInterval: 0}
+  - {type: None, sampleCount: 1, sampleInterval: 0}
+  triggers:
+  - {min: 0, max: -1, eventID: NONE, hysteresis: 0}
+  - {min: -1, max: -1, eventID: NONE, hysteresis: 0}
+  - {min: -1, max: -1, eventID: NONE, hysteresis: 0}
+  - {min: -1, max: -1, eventID: NONE, hysteresis: 0}
+- type: TippingBucket
+  readMode: Interval
+  readInterval: 400
+  absoluteWakeMinute: [-1, -1, -1, -1, -1, -1]
+  bootDelay_ms: 0
+  filters:
+  - {type: None, sampleCount: 1, sampleInterval: 0}
+  - {type: None, sampleCount: 1, sampleInterval: 0}
+  - {type: None, sampleCount: 1, sampleInterval: 0}
+  - {type: None, sampleCount: 1, sampleInterval: 0}
+  triggers:
+  - {min: -1, max: 5, eventID: DeviceSync, hysteresis: 0}
+  - {min: -1, max: -1, eventID: NONE, hysteresis: 0}
+  - {min: -1, max: -1, eventID: NONE, hysteresis: 0}
+  - {min: -1, max: -1, eventID: NONE, hysteresis: 0}
+network:
+  uplink: GSM
+  gsm:
+    bootDelay_ms: 0
+    apn: "m2m.orange.jo"
+    atCommandTimeoutMs: 2000
+    atCommandRetries: 5
+  wifi:
+    bootDelay_ms: 0
+    ssid: ""
+    password: ""
+    timeoutMs: 15000
+  mqtt:
+    enabled: true
+    mqttHost: "mqtt2.nexusnature.com"
+    mqttFallbackHost: "mqtt2.nexusnature.com"
+    mqttClientID: "nxzks71evfcj1gy7"
+    mqttUsername: "nxzks71evfcj1gy7"
+    mqttPassword: "NxiwK0rpTDhVQi9OhjpmY81qxA9mkc7_"
+    mqttTopic: "nexus/data"
+    mqttPort: 8884
+    timeoutMs: 10000
+    chunkSize: 4096
+    enableSeccureTLS: true
+  sync:
+    syncScheduleMinutes: [300, 1020, -1, -1, -1, -1]
+    dataSyncInterval: 0
+    dataSyncErrorInitialInterval: 20
+    syncErrorTimeMultiplier: 2
+    maxSyncRetries: 8
+    ntpSyncEvery: 245

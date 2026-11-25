@@ -8,16 +8,16 @@ daq:
   exportFileName: "data"
   flushCapacityPercentageTrigger: 0.8
   exportSDInterval: 10
-  exportSD_Binary: false
+  exportSD_Binary: true
   exportSD_CSV: true
   exportSD_CSVPending: true
   tippingBucketDebounce_ms: 25
 attachments:
 - type: RTClock
   readMode: Interval
-  readInterval: 40
+  readInterval: 400
   absoluteWakeMinute: [-1, -1, -1, -1, -1, -1]
-  bootDelay_ms: 0
+  bootDelay_ms: 50
   filters:
   - {type: None, sampleCount: 1, sampleInterval: 0}
   - {type: None, sampleCount: 1, sampleInterval: 0}
@@ -30,9 +30,9 @@ attachments:
   - {min: -1, max: -1, eventID: NONE, hysteresis: 0}
 - type: INA219
   readMode: Interval
-  readInterval: 40
+  readInterval: 400
   absoluteWakeMinute: [-1, -1, -1, -1, -1, -1]
-  bootDelay_ms: 0
+  bootDelay_ms: 50
   filters:
   - {type: None, sampleCount: 1, sampleInterval: 0}
   - {type: None, sampleCount: 1, sampleInterval: 0}
@@ -45,7 +45,7 @@ attachments:
   - {min: -1, max: -1, eventID: NONE, hysteresis: 0}
 - type: BME280
   readMode: Interval
-  readInterval: 40
+  readInterval: 400
   absoluteWakeMinute: [-1, -1, -1, -1, -1, -1]
   bootDelay_ms: 0
   filters:
@@ -54,13 +54,13 @@ attachments:
   - {type: None, sampleCount: 1, sampleInterval: 0}
   - {type: None, sampleCount: 1, sampleInterval: 0}
   triggers:
-  - {min: -1, max: -1, eventID: NONE, hysteresis: 0}
+  - {min: 0, max: -1, eventID: NONE, hysteresis: 0}
   - {min: -1, max: -1, eventID: NONE, hysteresis: 0}
   - {min: -1, max: -1, eventID: NONE, hysteresis: 0}
   - {min: -1, max: -1, eventID: NONE, hysteresis: 0}
 - type: TippingBucket
   readMode: Interval
-  readInterval: 40
+  readInterval: 400
   absoluteWakeMinute: [-1, -1, -1, -1, -1, -1]
   bootDelay_ms: 0
   filters:
@@ -69,7 +69,7 @@ attachments:
   - {type: None, sampleCount: 1, sampleInterval: 0}
   - {type: None, sampleCount: 1, sampleInterval: 0}
   triggers:
-  - {min: -1, max: -1, eventID: NONE, hysteresis: 0}
+  - {min: -1, max: 5, eventID: DeviceSync, hysteresis: 0}
   - {min: -1, max: -1, eventID: NONE, hysteresis: 0}
   - {min: -1, max: -1, eventID: NONE, hysteresis: 0}
   - {min: -1, max: -1, eventID: NONE, hysteresis: 0}
@@ -98,7 +98,7 @@ network:
     chunkSize: 4096
     enableSeccureTLS: true
   sync:
-    syncScheduleMinutes: [480, 1200, -1, -1, -1, -1]
+    syncScheduleMinutes: [300, 1020, -1, -1, -1, -1]
     dataSyncInterval: 0
     dataSyncErrorInitialInterval: 20
     syncErrorTimeMultiplier: 2
